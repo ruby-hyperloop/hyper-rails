@@ -7,16 +7,17 @@ module Reactrb
     class_option :all, :type => :boolean
 
     def inject_react_file_js
-      inject_into_file 'app/assets/javascripts/application.js', after: "// about supported directives.\n" do <<-'RUBY'
-Opal.load('components');
+      inject_into_file 'app/assets/javascripts/application.js', after: "// about supported directives.\n" do <<-'JS'
+//= require 'components'
+//= require 'react'
 //= require 'react_ujs'
-      RUBY
+      JS
       end
 
       if options[:"opal-jquery"] || options[:all]
-        inject_into_file 'app/assets/javascripts/application.js', after: "//= require jquery_ujs\n" do <<-'RUBY'
-//= require 'opal-jquery'
-        RUBY
+        inject_into_file 'app/assets/javascripts/application.js', after: "//= require jquery_ujs\n" do <<-'JS'
+Opal.load('components');
+        JS
         end
       end
 
@@ -38,6 +39,13 @@ Opal.load('components');
 # app/react/components.rb
 require 'opal'
 require 'reactive-ruby'
+if React::IsomorphicHelpers.on_opal_client?
+  require 'opal-jquery'
+  require 'browser'
+  require 'browser/interval'
+  require 'browser/delay'
+  # add any requires that can ONLY run on client here
+end
 #{"require 'reactive-router'" if options[:"reactive-router"] || options[:all]}
 #{"require 'reactive-record'" if options[:"reactive-record"] || options[:all]}
 #{"require 'models'"          if options[:"reactive-record"] || options[:all]}
@@ -54,7 +62,12 @@ require_tree './models'
 
     def add_config
       application "config.assets.paths << ::Rails.root.join('app', 'react').to_s"
+      application 'config.autoload_paths += %W(#{config.root}/app/react/components)'
       application 'config.autoload_paths += %W(#{config.root}/app/react/models)' if options[:"reactive-record"] || options[:all]
+      application 'config.eager_load_paths += %W(#{config.root}/app/react/components)'
+      application 'config.eager_load_paths += %W(#{config.root}/app/react/models)' if options[:"reactive-record"] || options[:all]
+      application 'config.watchable_files.concat Dir["#{config.root}/app/react/**/*.rb"]', env: :development
+      application 'config.react.variant = :development', env: :development
     end
 
     def add_gems
