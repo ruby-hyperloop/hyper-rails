@@ -8,7 +8,7 @@ module Reactrb
 
     def inject_react_file_js
       inject_into_file 'app/assets/javascripts/application.js', after: "// about supported directives.\n" do <<-'RUBY'
-//= require 'components'
+Opal.load('components');
 //= require 'react_ujs'
       RUBY
       end
