@@ -10,7 +10,7 @@ module Reactrb
         @modules = component_array[0..-2]
         @file_name = component_array.last
         @indet = 1
-        template "component_template.rb", File.join('app/react/components', @modules.join("/"), "#{@file_name.underscore}.rb")
+        template "component_template.rb", File.join('app/react/components', @modules.map(&:downcase).join("/"), "#{@file_name.underscore}.rb")
       end
     end
 

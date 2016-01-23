@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'reactive_rails_generator'
-  s.version     = '0.1.0'
+  s.version     = '0.1.2'
   s.date        = '2016-01-17'
   s.summary     = "React.rb generators for rails"
   s.description = "This gem provide rails generators for react.rb"

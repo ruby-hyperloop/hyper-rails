@@ -52,6 +52,11 @@ require_tree './models'
       end
     end
 
+    def add_config
+      application "config.assets.paths << ::Rails.root.join('app', 'react').to_s"
+      application 'config.autoload_paths += %W(#{config.root}/app/react/models)' if options[:"reactive-record"] || options[:all]
+    end
+
     def add_gems
       gem 'reactive-ruby'
       gem 'react-rails', '~> 1.3.0'
@@ -59,7 +64,6 @@ require_tree './models'
       gem 'therubyracer', platforms: :ruby
 
       # optional gems
-      gem 'opal-jquery'     if options[:"opal-jquery"]     || options[:all]
       gem 'reactive-router' if options[:"reactive-router"] || options[:all]
       gem 'reactive-record' if options[:"reactive-record"] || options[:all]
     end
