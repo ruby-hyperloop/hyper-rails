@@ -14,13 +14,10 @@ module Reactrb
       JS
       end
 
-      if options[:"opal-jquery"] || options[:all]
-        inject_into_file 'app/assets/javascripts/application.js', after: "//= require jquery_ujs\n" do <<-'JS'
+      inject_into_file 'app/assets/javascripts/application.js', after: "//= require jquery_ujs\n" do <<-'JS'
 Opal.load('components');
-        JS
-        end
+JS
       end
-
     end
 
     def inject_engine_to_routes
