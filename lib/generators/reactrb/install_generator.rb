@@ -9,7 +9,6 @@ module Reactrb
     def inject_react_file_js
       inject_into_file 'app/assets/javascripts/application.js', after: "// about supported directives.\n" do <<-'JS'
 //= require 'components'
-//= require 'react'
 //= require 'react_ujs'
       JS
       end
@@ -36,14 +35,15 @@ JS
 # app/react/components.rb
 require 'opal'
 require 'reactive-ruby'
+require 'react'
 if React::IsomorphicHelpers.on_opal_client?
   require 'opal-jquery'
   require 'browser'
   require 'browser/interval'
   require 'browser/delay'
-  # add any requires that can ONLY run on client here
+  # add any additional requires that can ONLY run on client here
 end
-#{"require 'reactive-router'" if options[:"reactive-router"] || options[:all]}
+#{"require 'reactive-router'\nrequire 'react_router'" if options[:"reactive-router"] || options[:all]}
 #{"require 'reactive-record'" if options[:"reactive-record"] || options[:all]}
 #{"require 'models'"          if options[:"reactive-record"] || options[:all]}
 require_tree './components'
@@ -74,7 +74,10 @@ require_tree './models'
       gem 'therubyracer', platforms: :ruby
 
       # optional gems
-      gem 'reactive-router' if options[:"reactive-router"] || options[:all]
+      if options[:"reactive-router"] || options[:all]
+        gem 'react-router-rails', '~>0.13.3'
+        gem 'reactive-router'
+      end
       gem 'reactive-record' if options[:"reactive-record"] || options[:all]
     end
   end
