@@ -10,8 +10,9 @@ Gem::Specification.new do |s|
   s.files       = [ "lib/reactive_rails_generator.rb",
                     "lib/generators/reactrb/install_generator.rb",
                     "lib/generators/reactrb/component_generator.rb",
-                    "lib/generators/reactrb/router_generator.rb"
-                    "lib/generators/reactrb/templates/component_template.rb"
+                    "lib/generators/reactrb/router_generator.rb",
+                    "lib/generators/reactrb/templates/component_template.rb",
+                    "lib/generators/reactrb/templates/router_template.rb"
                   ]
   s.homepage    =
     'https://github.com/loicboutet/reactive-rails-generator'
