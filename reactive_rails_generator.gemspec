@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'reactive_rails_generator'
-  s.version     = '0.1.4'
+  s.version     = '0.1.5'
   s.date        = '2016-01-17'
   s.summary     = "React.rb generators for rails"
   s.description = "This gem provide rails generators for react.rb"
@@ -10,9 +10,10 @@ Gem::Specification.new do |s|
   s.files       = [ "lib/reactive_rails_generator.rb",
                     "lib/generators/reactrb/install_generator.rb",
                     "lib/generators/reactrb/component_generator.rb",
+                    "lib/generators/reactrb/router_generator.rb"
                     "lib/generators/reactrb/templates/component_template.rb"
                   ]
   s.homepage    =
-    'http://rubygems.org/gems/hola'
+    'https://github.com/loicboutet/reactive-rails-generator'
   s.license       = 'MIT'
 end
