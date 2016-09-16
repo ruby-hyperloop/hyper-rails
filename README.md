@@ -11,13 +11,14 @@ gem "reactrb-rails-generator"
 then
 
 ```ruby
-bundle update
+bundle install
 ```
 
 ### Usage
 
 ```ruby
 rails g reactrb:install
+bundle update
 ```
 
 Options are :
