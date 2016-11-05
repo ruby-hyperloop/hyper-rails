@@ -1,5 +1,5 @@
 require 'rails/generators'
-module Reactrb
+module Hyperloop
   class InstallGenerator < Rails::Generators::Base
     class_option :'reactive-record', type: :boolean
     class_option :'opal-jquery', type: :boolean
@@ -39,8 +39,8 @@ Opal.load('components');
       create_file 'app/views/components.rb', <<-FILE
 # app/views/components.rb
 require 'opal'
-require 'react'
-require 'reactrb'
+require 'react/react-source'
+require 'hyper-react'
 if React::IsomorphicHelpers.on_opal_client?
   require 'opal-jquery'
   require 'browser'
@@ -78,9 +78,9 @@ require_tree './public'
     end
 
     def add_gems
-      gem 'reactrb'
-      gem 'react-rails', '~> 1.3.0'
-      gem 'opal-rails', '>= 0.8.1'
+
+      gem 'react-rails'
+      gem 'hyper-react'
       gem 'therubyracer', platforms: :ruby
 
       # optional gems
