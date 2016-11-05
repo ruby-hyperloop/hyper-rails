@@ -79,7 +79,8 @@ require_tree './public'
 
     def add_gems
 
-      gem 'react-rails'
+      gem "opal-rails"
+      gem "opal-browser"
       gem 'hyper-react'
       gem 'therubyracer', platforms: :ruby
 

@@ -14,5 +14,5 @@ Gem::Specification.new do |s|
   s.homepage    = 'https://github.com/ruby-hyperloop/hyper-rails'
   s.license     = 'MIT'
 
-  s.add_runtime_dependency 'rails', ['>= 4.0.0']
+  s.add_runtime_dependency 'rails', '>= 4.0.0'
 end

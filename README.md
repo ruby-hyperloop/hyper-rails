@@ -2,6 +2,8 @@
 
 ## Installation
 
+This generator will install HyperReact and Opal in Rails 4.x or 5.x
+
 In your `Gemfile`
 
 ```ruby
@@ -12,14 +14,11 @@ then
 
 ```ruby
 bundle install
-```
-
-### Usage
-
-```ruby
 rails g hyperloop:install
 bundle update
 ```
+
+This generator can also create HyperReact components.
 
 <!-- Options are :
 * --hyper-router to install hyper-router too
@@ -27,11 +26,30 @@ bundle update
 * --opal-jquery to install opal-jquery in the js application manifest
 * --all to do all the above -->
 
+### HyperReact Components
+
 ```ruby
 rails g hyperloop:component Home::Clock
 ```
 
-Will make the component app/views/components/home/clock.rb
+Which will make the component `Home::Clock` in  `app/views/components/home/clock.rb`
+
+You can render a component directly from a controller:
+
+```ruby
+class HomeController < ApplicationController
+  def clock
+    render_component
+  end
+end
+```
+
+Or from a view:
+
+```ruby
+<%= react_component('Home::Clock') %>
+```
+See [Ruby-Hyperllop.io](http://ruby-hyperloop.io/) for further examples.
 
 <!-- ```ruby
 rails g hyperloop:router Home::Show
