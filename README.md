@@ -2,41 +2,59 @@
 
 ## Installation
 
+This generator will install HyperReact and Opal in Rails 4.x or 5.x
+
 In your `Gemfile`
 
 ```ruby
-gem "reactrb-rails-generator"
+gem "hyper-rails"
 ```
 
 then
 
 ```ruby
 bundle install
-```
-
-### Usage
-
-```ruby
-rails g reactrb:install
+rails g hyperloop:install
 bundle update
 ```
 
-Options are :
-* --reactrb-router to install reactrb-router too
-* --reactive-record to install reactive-record too
+This generator can also create HyperReact components.
+
+<!-- Options are :
+* --hyper-router to install hyper-router too
+* --hyper-mesh to install hyper-mesh too
 * --opal-jquery to install opal-jquery in the js application manifest
-* --all to do all the above
+* --all to do all the above -->
+
+### HyperReact Components
 
 ```ruby
-rails g reactrb:component Home::Clock
+rails g hyperloop:component Home::Clock
 ```
 
-Will make the component app/views/components/home/clock.rb
+Which will make the component `Home::Clock` in  `app/views/components/home/clock.rb`
+
+You can render a component directly from a controller:
 
 ```ruby
-rails g reactrb:router Home::Show
+class HomeController < ApplicationController
+  def clock
+    render_component
+  end
+end
+```
+
+Or from a view:
+
+```ruby
+<%= react_component('Home::Clock') %>
+```
+See [Ruby-Hyperllop.io](http://ruby-hyperloop.io/) for further examples.
+
+<!-- ```ruby
+rails g hyperloop:router Home::Show
 ```
 
 Will make the router component app/views/components/home/show.rb
 
-Note that router components are components that mix-in the React::Router module.  Both normal components and routers are called the usual way from controllers or views using the render_component method.
+Note that router components are components that mix-in the React::Router module.  Both normal components and routers are called the usual way from controllers or views using the render_component method. -->
