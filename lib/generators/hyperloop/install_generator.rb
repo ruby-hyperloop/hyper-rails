@@ -1,37 +1,53 @@
 require 'rails/generators'
 module Hyperloop
   class InstallGenerator < Rails::Generators::Base
-    class_option :'reactive-record', type: :boolean
+    class_option :'hyper-mesh', type: :boolean
     class_option :'opal-jquery', type: :boolean
-    class_option :'reactrb-router', type: :boolean
+    class_option :'hyper-router', type: :boolean
     class_option :all, type: :boolean
 
     def inject_react_file_js
-      inject_into_file 'app/assets/javascripts/application.js',
-                       after: "// about supported directives.\n" do
+      prepend_file 'app/assets/javascripts/application.js' do
         <<-'JS'
+// added by hyper-rails:  These lines must preceed other requires especially turbo_links
 //= require 'components'
 //= require 'react_ujs'
         JS
       end
-      inject_into_file 'app/assets/javascripts/application.js',
-                       after: "//= require jquery_ujs\n" do
-        <<-'JS'
-Opal.load('components');
-        JS
-      end
+      append_file 'app/assets/javascripts/application.js', "Opal.load('components');\n"
     end
 
     def inject_engine_to_routes
-      if options[:'reactive-record'] || options[:all]
-        route 'mount ReactiveRecord::Engine => \'/rr\''
+      if options[:'hyper-mesh'] || options[:all]
+        route 'mount HyperMesh::Engine => \'/rr\''
       end
     end
 
     def create_components_directory
       create_file 'app/views/components/.keep', ''
-      if options[:'reactive-record'] || options[:all]
+      if options[:'hyper-mesh'] || options[:all]
         create_file 'app/models/public/.keep', ''
+      end
+    end
+
+    def create_policies_directory
+      if options[:'hyper-mesh'] || options[:all]
+        create_file 'app/policies/application_policy.rb', <<-RUBY
+# app/policies/application_policy
+
+# Policies regulate access to your public models
+# The following policy will open up full access (but only in development)
+# The policy system is very flexible and powerful.  See the documentation
+# for complete details.
+class ApplicationPolicy
+  # Allow any session to connect:
+  always_allow_connection
+  # Send all attributes from all public models
+  regulate_all_broadcasts { |policy| policy.send_all }
+  # Allow all changes to public models
+  allow_change(to: :all, on: [:create, :update, :destroy]) { true }
+end if Rails.env.development?
+        RUBY
       end
     end
 
@@ -48,13 +64,13 @@ if React::IsomorphicHelpers.on_opal_client?
   require 'browser/delay'
   # add any additional requires that can ONLY run on client here
 end
-#{"require 'reactrb-router'\nrequire 'react_router'" if options[:'reactive-router'] || options[:all]}
-#{'require \'reactive-record\'' if options[:'reactive-record'] || options[:all]}
-#{'require \'models\''          if options[:'reactive-record'] || options[:all]}
+#{"require 'hyper-router'\nrequire 'react_router'" if options[:'hyper-router'] || options[:all]}
+#{'require \'hyper-mesh\'' if options[:'hyper-mesh'] || options[:all]}
+#{'require \'models\''          if options[:'hyper-mesh'] || options[:all]}
 require_tree './components'
       FILE
 
-      if options[:'reactive-record'] || options[:all]
+      if options[:'hyper-mesh'] || options[:all]
         create_file 'app/models/models.rb', <<-FILE
 # app/models/models.rb
 require_tree './public'
@@ -65,11 +81,11 @@ require_tree './public'
     def add_config
       application 'config.assets.paths << ::Rails.root.join(\'app\', \'models\').to_s'
       application 'config.autoload_paths += %W(#{config.root}/app/views/components)'
-      if options[:'reactive-record'] || options[:all]
+      if options[:'hyper-mesh'] || options[:all]
         application 'config.autoload_paths += %W(#{config.root}/app/models/public)'
       end
       application 'config.eager_load_paths += %W(#{config.root}/app/views/components)'
-      if options[:'reactive-record'] || options[:all]
+      if options[:'hyper-mesh'] || options[:all]
         application 'config.eager_load_paths += %W(#{config.root}/app/models/public)'
       end
       application 'config.watchable_files.concat Dir["#{config.root}/app/views/**/*.rb"]',
@@ -85,11 +101,11 @@ require_tree './public'
       gem 'therubyracer', platforms: :ruby
 
       # optional gems
-      if options[:'reactrb-router'] || options[:all]
+      if options[:'hyper-router'] || options[:all]
         gem 'react-router-rails', '~> 0.13.3'
-        gem 'reactrb-router'
+        gem 'hyper-router'
       end
-      gem 'reactive-record' if options[:'reactive-record'] || options[:all]
+      gem 'hyper-mesh' if options[:'hyper-mesh'] || options[:all]
     end
   end
 end

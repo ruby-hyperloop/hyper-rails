@@ -49,7 +49,7 @@ Or from a view:
 ```ruby
 <%= react_component('Home::Clock') %>
 ```
-See [Ruby-Hyperllop.io](http://ruby-hyperloop.io/) for further examples.
+See [ruby-hyperloop.io](http://ruby-hyperloop.io/) for further examples.
 
 <!-- ```ruby
 rails g hyperloop:router Home::Show
