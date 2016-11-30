@@ -1,4 +1,5 @@
 
+#  ![](https://github.com/Serzhenka/hyper-loop-logos/blob/master/hyper-rails_150.png)HyperRails
 
 ## Installation
 
