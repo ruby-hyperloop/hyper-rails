@@ -67,24 +67,22 @@ end
 #{"require 'hyper-router'\nrequire 'react_router'" if options[:'hyper-router'] || options[:all]}
 #{'require \'hyper-mesh\'' if options[:'hyper-mesh'] || options[:all]}
 #{'require \'models\''          if options[:'hyper-mesh'] || options[:all]}
-require_tree './components'
+require_tree './components' if RUBY_ENGINE == 'opal'
       FILE
 
       if options[:'hyper-mesh'] || options[:all]
         create_file 'app/models/models.rb', <<-FILE
 # app/models/models.rb
-require_tree './public'
+require_tree './public' if RUBY_ENGINE == 'opal'
         FILE
       end
     end
 
     def add_config
       application 'config.assets.paths << ::Rails.root.join(\'app\', \'models\').to_s'
-      application 'config.autoload_paths += %W(#{config.root}/app/views/components)'
       if options[:'hyper-mesh'] || options[:all]
         application 'config.autoload_paths += %W(#{config.root}/app/models/public)'
       end
-      application 'config.eager_load_paths += %W(#{config.root}/app/views/components)'
       if options[:'hyper-mesh'] || options[:all]
         application 'config.eager_load_paths += %W(#{config.root}/app/models/public)'
       end
@@ -94,9 +92,8 @@ require_tree './public'
     end
 
     def add_gems
-
-      gem "opal-rails"
-      gem "opal-browser"
+      gem 'opal-rails'
+      gem 'opal-browser'
       gem 'hyper-react'
       gem 'therubyracer', platforms: :ruby
 
