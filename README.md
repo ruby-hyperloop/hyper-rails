@@ -1,7 +1,7 @@
 
+#  ![](https://github.com/Serzhenka/hyper-loop-logos/blob/master/hyper-rails_150.png)Hyper-rails
 
-## Installation
-
+### Installation
 This generator will install HyperReact and Opal in Rails 4.x or 5.x
 
 In your `Gemfile`
