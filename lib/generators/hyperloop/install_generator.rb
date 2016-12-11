@@ -67,7 +67,7 @@ end
 #{"require 'hyper-router'\nrequire 'react_router'" if options[:'hyper-router'] || options[:all]}
 #{'require \'hyper-mesh\'' if options[:'hyper-mesh'] || options[:all]}
 #{'require \'models\''          if options[:'hyper-mesh'] || options[:all]}
-require_tree './components' if RUBY_ENGINE == 'opal'
+require_tree './components' 
       FILE
 
       if options[:'hyper-mesh'] || options[:all]
