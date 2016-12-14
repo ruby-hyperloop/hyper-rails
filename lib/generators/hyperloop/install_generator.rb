@@ -10,6 +10,8 @@ module Hyperloop
       prepend_file 'app/assets/javascripts/application.js' do
         <<-'JS'
 // added by hyper-rails:  These lines must preceed other requires especially turbo_links
+//= require 'opal'
+//= require 'react/react-source'
 //= require 'components'
 //= require 'react_ujs'
         JS
@@ -55,7 +57,6 @@ end if Rails.env.development?
       create_file 'app/views/components.rb', <<-FILE
 # app/views/components.rb
 require 'opal'
-require 'react/react-source'
 require 'hyper-react'
 if React::IsomorphicHelpers.on_opal_client?
   require 'opal-jquery'
@@ -67,7 +68,7 @@ end
 #{"require 'hyper-router'\nrequire 'react_router'" if options[:'hyper-router'] || options[:all]}
 #{'require \'hyper-mesh\'' if options[:'hyper-mesh'] || options[:all]}
 #{'require \'models\''          if options[:'hyper-mesh'] || options[:all]}
-require_tree './components' 
+require_tree './components'
       FILE
 
       if options[:'hyper-mesh'] || options[:all]
