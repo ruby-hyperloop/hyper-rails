@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'hyper-rails'
-  s.version     = '0.4.2'
+  s.version     = '0.4.1'
   s.summary     = 'Hyperloop generators for Rails'
   s.description = 'This gem provide rails generators for Hyperloop'
   s.authors     = ['Loic Boutet']
