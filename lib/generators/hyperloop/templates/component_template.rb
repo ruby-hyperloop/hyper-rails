@@ -7,7 +7,7 @@ module Components
   <%="  "* @indet %># param :param_with_default2, default: "default value" # alternative syntax
   <%="  "* @indet %># param :param_with_type, type: Hash
   <%="  "* @indet %># param :array_of_hashes, type: [Hash]
-  <%="  "* @indet %># collect_all_other_params_as :attributes  #collects all other params into a hash
+  <%="  "* @indet %># collect_other_params_as :attributes  # collects all other params into a hash
 
   <%="  "* @indet %># The following are the most common lifecycle call backs,
   <%="  "* @indet %># the following are the most common lifecycle call backs# delete any that you are not using.
