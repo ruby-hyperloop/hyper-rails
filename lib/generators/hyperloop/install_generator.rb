@@ -11,7 +11,7 @@ module Hyperloop
         <<-'JS'
 // added by hyper-rails:  These lines must preceed other requires especially turbo_links
 //= require 'opal'
-//= require 'react/react-source'
+//= require 'react/react-source-browser'
 //= require 'components'
 //= require 'react_ujs'
         JS
