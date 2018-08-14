@@ -1,5 +1,8 @@
 
 #  ![](https://github.com/Serzhenka/hyper-loop-logos/blob/master/hyper-rails_150.png)Hyper-rails
+[![Build Status](https://travis-ci.org/ruby-hyperloop/hyper-rails.svg?branch=master)](https://travis-ci.org/ruby-hyperloop/hyper-rails)
+[![Gem Version](https://badge.fury.io/rb/hyper-rails.svg)](https://badge.fury.io/rb/hyper-rails)
+
 
 ### Installation
 This generator will install HyperReact and Opal in Rails 4.x or 5.x
