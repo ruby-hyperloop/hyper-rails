@@ -16,3 +16,12 @@ before_install:
 before_script:
   - bundle install --jobs=3 --retry=3
 script: bundle exec rspec
+deploy:
+  provider: rubygems
+  gem: hyper-rails
+  gemspec: hyper-rails.gemspec
+  api_key:
+    secure: QmXz+QynBgkk9xgjyP02KaNAwj+HtlNxqAwz9M1X0IaT6Gj35vTFo4lD+UAjYLA1tca/GZMBo2NSeA98usGgu6FRivvQnsOdpZdp6NUVK3f2/bmWOvuLLHXD096ta9carO0uAIqSAK4qBnZdW7X+e/z0ZGj0xUeQx7ZRo/ynEIZb1AD5ZPiKlNMx9ZvpYyPrZPDuY1j6ri1WNYeSvAdzV1zNCg8biMUpU5GLnxurgd05O2MvRq6wyKPT/0J/J3OmVg+tJwI+4LdxxFkQ3CyZM6X5CrEU87v5pviwO9yC4n7+Vh5s1npH6VSjQIPWaxjTvNaLqhVvTCQg7++jAF1Hm9TnzcMhriChCuNBr5ZA858AtZSmkS6adYReJ0wdcZ2Oy2el8hjBC+lrFsePz7/UR/shznEADsuHCHi8WWSHvsdSllgYf2RFu2txXOaVpIi30G06BMutCRMRP7LfQy1AoxDYMrPpKVNom4+sK/pGPEYD/zTMueHq921JPQDhftUQUOEYQVZwhLrJDnfa1dPq6NdGFsupLRWGl0Z11b+MXtMoaB0rVYTBwl6bIo+wkIdNVvYCijDS+w3Ki472B9E9CaS8j3vNuKeCdCsi071dexkS5TKAO0U4Pf3z+2rfGG5ygJ/KHHm+6nXxP0iqlHafjZdUhwKnmGTvz9Itpv0NBII=
+  on:
+    tags: true
+    rvm: 2.4.4
