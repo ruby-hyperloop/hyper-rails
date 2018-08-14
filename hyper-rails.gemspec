@@ -15,4 +15,12 @@ Gem::Specification.new do |s|
   s.license     = 'MIT'
 
   s.add_runtime_dependency 'rails', '>= 4.0.0'
+
+  s.add_development_dependency 'bundler', '~> 1.15'
+  s.add_development_dependency 'chromedriver-helper'
+  s.add_development_dependency 'pry'
+  s.add_development_dependency 'rake', '~> 10.0'
+  s.add_development_dependency 'rspec'
+  s.add_development_dependency 'rubocop'
+
 end
